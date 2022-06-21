@@ -12,7 +12,8 @@ public class Directorio {
 		
 		Path path = Paths.get(direccion);
 		try (Stream<Path> subPath = Files.walk(path,1)){
-			subPath.forEach(System.out::println);
+			subPath.sorted().forEach(System.out::println);
+			//subPath.forEach(System.out::println);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

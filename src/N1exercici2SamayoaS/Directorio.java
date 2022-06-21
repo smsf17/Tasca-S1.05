@@ -15,14 +15,22 @@ public class Directorio {
 			System.out.println(list[i] +"                " 
 					+sdf.format(path.lastModified()));
 			File f = new File(path.getAbsolutePath(), list[i]);
-			if(f.isDirectory()) {
-				String[] archivosCarpetas  = f.list();
+				recurse (f);
+				/*String[] archivosCarpetas  = f.list();
 				for(int id=0; id<archivosCarpetas.length; id++) {
 					System.out.println("     " +archivosCarpetas[id] 
 							+"    " +sdf.format(path.lastModified()));
-				}
+				}*/
 			}		
 		}
+	
+	
+	static void recurse (File f) {
+		if(f.isDirectory()) {
+			String[] archivosCarpetas  = f.list();
+			for(int id=0; id<archivosCarpetas.length; id++) {
+				System.out.println("     " +archivosCarpetas[id]);
+			}
+		}
 	}
-
 }
