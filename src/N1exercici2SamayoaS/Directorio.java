@@ -1,36 +1,31 @@
 package N1exercici2SamayoaS;
 
 import java.io.File;
-import java.text.SimpleDateFormat;
+import java.io.IOException;
 
 public class Directorio {
 	
 	public void obtenerDirectorio (String direccion) {
-		
-		File path = new File(direccion);
-		String[] list = path.list();
-				SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-		for (int i=0; i<list.length; i++) {
-			
-			System.out.println(list[i] +"                " 
-					+sdf.format(path.lastModified()));
-			File f = new File(path.getAbsolutePath(), list[i]);
-				recurse (f);
-				/*String[] archivosCarpetas  = f.list();
-				for(int id=0; id<archivosCarpetas.length; id++) {
-					System.out.println("     " +archivosCarpetas[id] 
-							+"    " +sdf.format(path.lastModified()));
-				}*/
-			}		
+		{
+	}
+			File currentDirectory = new File(direccion); // current directory
+			displayDirectoryContents(currentDirectory);
 		}
-	
-	
-	static void recurse (File f) {
-		if(f.isDirectory()) {
-			String[] archivosCarpetas  = f.list();
-			for(int id=0; id<archivosCarpetas.length; id++) {
-				System.out.println("     " +archivosCarpetas[id]);
+
+		public static void displayDirectoryContents(File dir) {
+			try {
+				File[] files = dir.listFiles();
+				for (File file : files) {
+					if (file.isDirectory()) {
+						System.out.println("directory:" + file.getCanonicalPath());
+						displayDirectoryContents(file);
+					} else {
+						System.out.println("     file:" + file.getCanonicalPath());
+					}
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
-		}
+		
 	}
 }
